@@ -1,9 +1,7 @@
 <?php
 
-// 1. Inisialisasi Array $matkul
 $matkul = ["PTI", "ALPRO", "DPW", "STRUKDAT", "JARKOM", "PAW", "PSBF", "RPL"];
 
-// 2. Perulangan foreach dengan parameter alias ($m)
 foreach ($matkul as $m) {
     
     // 3. Pengecekan nilai menggunakan switch
