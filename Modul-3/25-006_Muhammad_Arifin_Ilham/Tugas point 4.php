@@ -10,7 +10,6 @@ $height["Frank"] = "168";
 $height["George"] = "175";
 $height["Harry"] = "182";
 
-// Menampilkan format array height
 echo "height = (";
 $keys = array_keys($height);
 $last_key = end($keys);
@@ -32,7 +31,6 @@ echo "<hr>";
 // 4.2. Membuat array baru bernama $weight dengan tiga data
 $weight = array("Andy"=>"70", "Barry"=>"65", "Charlie"=>"75");
 
-// Menampilkan format array weight
 echo "weight = (";
 $keys_w = array_keys($weight);
 $last_key_w = end($keys_w);
@@ -44,9 +42,6 @@ foreach ($weight as $name => $value) {
 }
 echo ")<br><br>";
 
-// Menampilkan seluruh data dari array $weight dengan struktur perulangan FOR
-// Karena array asosiatif tidak bisa langsung diakses via $weight[$i] secara numerik murni,
-// kita bisa mengubah key-nya menjadi array numerik menggunakan array_keys()
 $keys_weight = array_keys($weight);
 $arr_length = count($weight);
 
