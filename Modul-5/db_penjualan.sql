@@ -1,6 +1,7 @@
 CREATE DATABASE DB_PENJUALAN;
 USE DB_PENJUALAN;
 
+-- Tabel user
 CREATE TABLE `user` (
     id_user TINYINT(2) AUTO_INCREMENT PRIMARY KEY NOT NULL,
     username VARCHAR(30),
@@ -11,6 +12,7 @@ CREATE TABLE `user` (
     level TINYINT(1)
 );
 
+-- Tabel supplier
 CREATE TABLE supplier (
     id INT(2) AUTO_INCREMENT PRIMARY KEY NOT NULL,
     nama VARCHAR(100),
@@ -29,28 +31,26 @@ CREATE TABLE barang (
     FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
--- Tabel pelanggan
+-- Tabel pelanggan 
 CREATE TABLE pelanggan (
-    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    id VARCHAR(20) PRIMARY KEY NOT NULL,
     nama VARCHAR(100),
     jenis_kelamin ENUM('L', 'P'),
     telp VARCHAR(12),
     alamat TEXT
 );
 
--- 3. Membuat Tabel Transaksi
-
--- Tabel transaksi
+-- Tabel transaksi 
 CREATE TABLE transaksi (
     id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     waktu_transaksi DATE,
     keterangan TEXT,
     total INT(11),
-    pelanggan_id INT(11), 
+    pelanggan_id VARCHAR(20), 
     FOREIGN KEY (pelanggan_id) REFERENCES pelanggan(id) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
--- Tabel transaksi_detail (Menggunakan Composite Primary Key)
+-- Tabel transaksi_detail
 CREATE TABLE transaksi_detail (
     transaksi_id INT(11) NOT NULL,
     barang_id INT(11) NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE pembayaran (
     FOREIGN KEY (transaksi_id) REFERENCES transaksi(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Mengisi 10 data menggunakan INSERT
+
 -- Insert User (10 data)
 INSERT INTO `user` (username, password, nama, alamat, hp, level) VALUES
 ('admin', 'admin123', 'Administrator', 'Jl. Pusat No. 1', '0811111111', 1),
@@ -98,7 +98,7 @@ INSERT INTO supplier (nama, telp, alamat) VALUES
 ('UD. Karya Abadi', '0869990000', 'Yogyakarta'),
 ('PT. Pangan Sejahtera', '0871231234', 'Malang');
 
--- Insert Barang (10 data)
+-- Insert Barang 
 INSERT INTO barang (kode_barang, nama_barang, harga, stok, supplier_id) VALUES
 ('BRG001', 'Beras Premium 5kg', 65000, 50, 1),
 ('BRG002', 'Minyak Goreng 2L', 35000, 100, 2),
@@ -111,31 +111,31 @@ INSERT INTO barang (kode_barang, nama_barang, harga, stok, supplier_id) VALUES
 ('BRG009', 'Pasta Gigi 150g', 16000, 90, 8),
 ('BRG010', 'Detergen Bubuk 1kg', 22000, 65, 9);
 
--- Insert Pelanggan (10 data)
-INSERT INTO pelanggan (nama, jenis_kelamin, telp, alamat) VALUES
-('Andi Wijaya', 'L', '0811111111', 'Jl. Merdeka No. 1'),
-('Bunga Citra', 'P', '0822222222', 'Jl. Sudirman No. 2'),
-('Candra Kirana', 'L', '0833333333', 'Jl. Thamrin No. 3'),
-('Diana Putri', 'P', '0844444444', 'Jl. Gatot Subroto No. 4'),
-('Eko Prasetyo', 'L', '0855555555', 'Jl. Ahmad Yani No. 5'),
-('Fitri Handayani', 'P', '0866666666', 'Jl. Diponegoro No. 6'),
-('Gilang Ramadhan', 'L', '0877777777', 'Jl. Pahlawan No. 7'),
-('Hesti Purwadinata', 'P', '0888888888', 'Jl. Pemuda No. 8'),
-('Indra Herlambang', 'L', '0899999999', 'Jl. Veteran No. 9'),
-('Julia Perez', 'P', '0810101010', 'Jl. Kartini No. 10');
+-- Insert Pelanggan 
+INSERT INTO pelanggan (id, nama, jenis_kelamin, telp, alamat) VALUES
+('P001', 'Andi Wijaya', 'L', '0811111111', 'Jl. Merdeka No. 1'),
+('P002', 'Bunga Citra', 'P', '0822222222', 'Jl. Sudirman No. 2'),
+('P003', 'Candra Kirana', 'L', '0833333333', 'Jl. Thamrin No. 3'),
+('P004', 'Diana Putri', 'P', '0844444444', 'Jl. Gatot Subroto No. 4'),
+('P005', 'Eko Prasetyo', 'L', '0855555555', 'Jl. Ahmad Yani No. 5'),
+('P006', 'Fitri Handayani', 'P', '0866666666', 'Jl. Diponegoro No. 6'),
+('P007', 'Gilang Ramadhan', 'L', '0877777777', 'Jl. Pahlawan No. 7'),
+('P008', 'Hesti Purwadinata', 'P', '0888888888', 'Jl. Pemuda No. 8'),
+('P009', 'Indra Herlambang', 'L', '0899999999', 'Jl. Veteran No. 9'),
+('P010', 'Julia Perez', 'P', '0810101010', 'Jl. Kartini No. 10');
 
--- Insert Transaksi (10 data)
+-- Insert Transaksi
 INSERT INTO transaksi (waktu_transaksi, keterangan, total, pelanggan_id) VALUES
-('2023-10-01', 'Pembelian Rutin', 130000, 1),
-('2023-10-02', 'Pembelian Grosir', 70000, 2),
-('2023-10-03', 'Belanja Harian', 45000, 3),
-('2023-10-04', 'Belanja Bulanan', 200000, 4),
-('2023-10-05', 'Pembelian Toko', 56000, 5),
-('2023-10-06', 'Belanja Harian', 36000, 6),
-('2023-10-07', 'Pembelian Snack', 75000, 7),
-('2023-10-08', 'Belanja Mingguan', 150000, 8),
-('2023-10-09', 'Pembelian Kebutuhan', 50000, 9),
-('2023-10-10', 'Belanja Akhir Pekan', 225000, 10);
+('2023-10-01', 'Pembelian Rutin', 130000, 'P001'),
+('2023-10-02', 'Pembelian Grosir', 70000, 'P002'),
+('2023-10-03', 'Belanja Harian', 45000, 'P003'),
+('2023-10-04', 'Belanja Bulanan', 200000, 'P004'),
+('2023-10-05', 'Pembelian Toko', 56000, 'P005'),
+('2023-10-06', 'Belanja Harian', 36000, 'P006'),
+('2023-10-07', 'Pembelian Snack', 75000, 'P007'),
+('2023-10-08', 'Belanja Mingguan', 150000, 'P008'),
+('2023-10-09', 'Pembelian Kebutuhan', 50000, 'P009'),
+('2023-10-10', 'Belanja Akhir Pekan', 225000, 'P010');
 
 -- Insert Transaksi Detail (10 data)
 INSERT INTO transaksi_detail (transaksi_id, barang_id, harga, qty) VALUES
