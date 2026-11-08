@@ -61,8 +61,9 @@ include 'koneksi.php';
             <tr>
                 <th width="5%">No</th>
                 <th>Nama</th>
-                <th>Telp</th>
-                <th>Alamat</th>
+                <th>nim</th>
+                <th>prodi</th>
+                <th>jenjang</th>
                 <th width="20%">Tindakan</th>
             </tr>
         </thead>
@@ -75,8 +76,9 @@ include 'koneksi.php';
             <tr>
                 <td class="text-center"><?= $no++; ?></td>
                 <td><?= $data['nama']; ?></td>
-                <td><?= $data['telp']; ?></td>
-                <td><?= $data['alamat']; ?></td>
+                <td><?= $data['nim']; ?></td>
+                <td><?= $data['prodi']; ?></td>
+                <td><?= $data["jenjang"]?></td>
                 <td class = "tindakan">
                     <a href="update.php?id=<?= $data['id']; ?>" class="btn btn-edit">Edit</a>
                     <!-- Alert Confirm JavaScript -->
