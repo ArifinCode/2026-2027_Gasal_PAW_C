@@ -1,31 +1,7 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Waktu pembuatan: 15 Nov 2026 pada 07.59
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `penjualan`
---
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `barang`
---
 
 CREATE TABLE `barang` (
   `id` int(11) NOT NULL,
@@ -35,10 +11,6 @@ CREATE TABLE `barang` (
   `stok` int(11) NOT NULL DEFAULT 0,
   `supplier_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `barang`
---
 
 INSERT INTO `barang` (`id`, `kode_barang`, `nama_barang`, `harga`, `stok`, `supplier_id`) VALUES
 (1, 'BRG001', 'Beras Premium 5kg', 65000, 50, 1),
@@ -52,12 +24,6 @@ INSERT INTO `barang` (`id`, `kode_barang`, `nama_barang`, `harga`, `stok`, `supp
 (9, 'BRG009', 'Deterjen 800g', 21000, 55, 7),
 (10, 'BRG010', 'Air Mineral 600ml', 3500, 150, 8);
 
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `pelanggan`
---
-
 CREATE TABLE `pelanggan` (
   `id` varchar(20) NOT NULL,
   `nama` varchar(100) NOT NULL,
@@ -65,10 +31,6 @@ CREATE TABLE `pelanggan` (
   `telp` varchar(12) DEFAULT NULL,
   `alamat` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `pelanggan`
---
 
 INSERT INTO `pelanggan` (`id`, `nama`, `jenis_kelamin`, `telp`, `alamat`) VALUES
 ('PLG001', 'Budi Santoso', 'L', '081234567801', 'Gresik'),
@@ -82,12 +44,6 @@ INSERT INTO `pelanggan` (`id`, `nama`, `jenis_kelamin`, `telp`, `alamat`) VALUES
 ('PLG009', 'Fajar Nugroho', 'L', '081234567809', 'Pasuruan'),
 ('PLG010', 'Rina Kusuma', 'P', '081234567810', 'Madura');
 
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `pembayaran`
---
-
 CREATE TABLE `pembayaran` (
   `id` int(11) NOT NULL,
   `waktu_bayar` datetime NOT NULL,
@@ -96,9 +52,6 @@ CREATE TABLE `pembayaran` (
   `transaksi_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `pembayaran`
---
 
 INSERT INTO `pembayaran` (`id`, `waktu_bayar`, `total`, `metode`, `transaksi_id`) VALUES
 (1, '2026-11-01 09:15:00', 130000, 'TUNAI', 1),
@@ -112,22 +65,12 @@ INSERT INTO `pembayaran` (`id`, `waktu_bayar`, `total`, `metode`, `transaksi_id`
 (9, '2026-11-12 12:00:00', 45000, 'TRANSFER', 9),
 (10, '2026-11-14 17:40:00', 84000, 'EDC', 10);
 
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `supplier`
---
-
 CREATE TABLE `supplier` (
   `id` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `telp` varchar(12) DEFAULT NULL,
   `alamat` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `supplier`
---
 
 INSERT INTO `supplier` (`id`, `nama`, `telp`, `alamat`) VALUES
 (1, 'PT Sumber Pangan', '031555001', 'Jl. Raya Gresik No. 12, Gresik'),
@@ -141,11 +84,6 @@ INSERT INTO `supplier` (`id`, `nama`, `telp`, `alamat`) VALUES
 (9, 'UD Snack Mantap', '031555009', 'Jl. Kenjeran No. 50, Surabaya'),
 (10, 'CV Rempah Nusantara', '031555010', 'Jl. Panglima Sudirman No. 3, Sidoarjo');
 
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `transaksi`
---
 
 CREATE TABLE `transaksi` (
   `id` int(11) NOT NULL,
@@ -155,9 +93,6 @@ CREATE TABLE `transaksi` (
   `pelanggan_id` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `transaksi`
---
 
 INSERT INTO `transaksi` (`id`, `waktu_transaksi`, `keterangan`, `total`, `pelanggan_id`) VALUES
 (1, '2026-11-01', 'Pembelian harian', 130000, 'PLG001'),
@@ -184,10 +119,6 @@ CREATE TABLE `transaksi_detail` (
   `qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `transaksi_detail`
---
-
 INSERT INTO `transaksi_detail` (`transaksi_id`, `barang_id`, `harga`, `qty`) VALUES
 (1, 1, 65000, 2),
 (2, 2, 38000, 3),
@@ -200,12 +131,6 @@ INSERT INTO `transaksi_detail` (`transaksi_id`, `barang_id`, `harga`, `qty`) VAL
 (9, 6, 9000, 5),
 (10, 10, 3500, 24);
 
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `user`
---
-
 CREATE TABLE `user` (
   `id_user` tinyint(4) NOT NULL,
   `username` varchar(30) NOT NULL,
@@ -215,10 +140,6 @@ CREATE TABLE `user` (
   `hp` varchar(20) DEFAULT NULL,
   `level` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `user`
---
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `nama`, `alamat`, `hp`, `level`) VALUES
 (1, 'admin', '0192023a7bbd73250516f069df18b500', 'Administrator', 'Jl. Raya Gresik No. 1', '081300000001', 1),
@@ -232,122 +153,58 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `nama`, `alamat`, `hp`, `
 (9, 'staff1', 'de9bf5643eabf80f4a56fda3bbb84483', 'Lia Staff', 'Jl. Kenjeran No. 40', '081300000009', 0),
 (10, 'staff2', 'de9bf5643eabf80f4a56fda3bbb84483', 'Bima Staff', 'Jl. Panglima Sudirman No. 6', '081300000010', 0);
 
---
--- Indexes for dumped tables
---
-
---
--- Indeks untuk tabel `barang`
---
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `kode_barang` (`kode_barang`),
   ADD KEY `fk_barang_supplier` (`supplier_id`);
 
---
--- Indeks untuk tabel `pelanggan`
---
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`id`);
 
---
--- Indeks untuk tabel `pembayaran`
---
 ALTER TABLE `pembayaran`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_pembayaran_transaksi` (`transaksi_id`);
 
---
--- Indeks untuk tabel `supplier`
---
 ALTER TABLE `supplier`
   ADD PRIMARY KEY (`id`);
 
---
--- Indeks untuk tabel `transaksi`
---
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_transaksi_pelanggan` (`pelanggan_id`);
 
---
--- Indeks untuk tabel `transaksi_detail`
---
 ALTER TABLE `transaksi_detail`
   ADD PRIMARY KEY (`transaksi_id`,`barang_id`),
   ADD KEY `fk_detail_barang` (`barang_id`);
 
---
--- Indeks untuk tabel `user`
---
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`),
   ADD UNIQUE KEY `username` (`username`);
 
---
--- AUTO_INCREMENT untuk tabel yang dibuang
---
-
---
--- AUTO_INCREMENT untuk tabel `barang`
---
 ALTER TABLE `barang`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
---
--- AUTO_INCREMENT untuk tabel `pembayaran`
---
 ALTER TABLE `pembayaran`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
---
--- AUTO_INCREMENT untuk tabel `supplier`
---
 ALTER TABLE `supplier`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
---
--- AUTO_INCREMENT untuk tabel `transaksi`
---
 ALTER TABLE `transaksi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
---
--- AUTO_INCREMENT untuk tabel `user`
---
 ALTER TABLE `user`
   MODIFY `id_user` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
---
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
---
-
---
--- Ketidakleluasaan untuk tabel `barang`
---
 ALTER TABLE `barang`
   ADD CONSTRAINT `fk_barang_supplier` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
---
--- Ketidakleluasaan untuk tabel `pembayaran`
---
 ALTER TABLE `pembayaran`
   ADD CONSTRAINT `fk_pembayaran_transaksi` FOREIGN KEY (`transaksi_id`) REFERENCES `transaksi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Ketidakleluasaan untuk tabel `transaksi`
---
 ALTER TABLE `transaksi`
   ADD CONSTRAINT `fk_transaksi_pelanggan` FOREIGN KEY (`pelanggan_id`) REFERENCES `pelanggan` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
---
--- Ketidakleluasaan untuk tabel `transaksi_detail`
---
 ALTER TABLE `transaksi_detail`
   ADD CONSTRAINT `fk_detail_barang` FOREIGN KEY (`barang_id`) REFERENCES `barang` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_detail_transaksi` FOREIGN KEY (`transaksi_id`) REFERENCES `transaksi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
